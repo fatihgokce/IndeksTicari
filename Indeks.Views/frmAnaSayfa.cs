@@ -21,6 +21,8 @@ namespace Indeks.Views
     ScreenState g_screenState;
     AyarlarManager _mngAyar;
     bool first = true;
+  
+    private readonly string[] FORM_NAMES={"STOK","FATURA"};
     public frmAnaSayfa():base()
     {
         
@@ -30,7 +32,7 @@ namespace Indeks.Views
       InitializeScreenValues();
       g_screenState.ChangeTo(Engine.FindSettings().Paket);    
       //backgroundWorker1.RunWorkerAsync();
-     
+    
     
     
       this.Text = "IndeksTicari" + "-" + UserInfo.Sube.Id.ToString() + "-" + UserInfo.Sube.SubeIsmi;
@@ -42,7 +44,7 @@ namespace Indeks.Views
        -Yardımcı Proğramlar
        * Şube Açma,Kullnanıcı Kaydetme
        */
-      labVersiyon.Text = "Versiyon:{0}".With(Engine.Versiyon());
+      //labVersiyon.Text = "Versiyon:{0}".With(Engine.Versiyon());
       Uyar();
      
     }
@@ -63,7 +65,7 @@ namespace Indeks.Views
             List<FatIrsUst> fatListe = _mngFatIrsUst.GetListFaturaToday(UserInfo.Sube.Id);
             List<FatIrsUst> irsListe = _mngFatIrsUst.GetListIrsaliyeSevkToday(UserInfo.Sube.Id);
             List<SiparisUst> sipListe = _mngSipUst.GetListSiparisTeslimToday(UserInfo.Sube.Id);
-            labelFat.Text = labelIrs.Text = labelSip.Text = labelSenet.Text = labelCek.Text = "";
+            //labelFat.Text = labelIrs.Text = labelSip.Text = labelSenet.Text = labelCek.Text = "";
             if(fatListe.Count>0 || senetListe.Count>0 || cekListe.Count>0 || irsListe.Count>0 || sipListe.Count>0)
             {
                 frmUyari frm = new frmUyari();
@@ -71,19 +73,19 @@ namespace Indeks.Views
             }
             if (fatListe.Count > 0) {
                 
-                labelFat.Text = string.Format("{0} tane vadesi gelmiş Faturanız var", fatListe.Count);
+                //labelFat.Text = string.Format("{0} tane vadesi gelmiş Faturanız var", fatListe.Count);
             }
             if (irsListe.Count > 0) {               
-                labelIrs.Text = string.Format("{0} tane sevk tarihi gelmiş İrsaliyeniz var", irsListe.Count);
+                //labelIrs.Text = string.Format("{0} tane sevk tarihi gelmiş İrsaliyeniz var", irsListe.Count);
             }
             if (sipListe.Count > 0) {           
-                labelSip.Text = string.Format("{0} tane teslim tarihi gelmiş Siparişiniz var", sipListe.Count);
+                //labelSip.Text = string.Format("{0} tane teslim tarihi gelmiş Siparişiniz var", sipListe.Count);
             }
             if (cekListe.Count > 0) {       
-                labelCek.Text = string.Format("{0} tane vadesi gelmiş Çekiniz var", cekListe.Count);
+                //labelCek.Text = string.Format("{0} tane vadesi gelmiş Çekiniz var", cekListe.Count);
             }
             if (senetListe.Count > 0) {              
-                labelSenet.Text = string.Format("{0} tane vadesi gelmiş Senetiniz var", senetListe.Count);
+                //labelSenet.Text = string.Format("{0} tane vadesi gelmiş Senetiniz var", senetListe.Count);
             }
         } catch (Exception exc) {
             MessageBox.Show(exc.Message); LogWrite.Write(exc);
@@ -110,7 +112,7 @@ namespace Indeks.Views
     }
     private void frmAnaSayfa_Load(object sender, EventArgs e)
     {
-    
+        this.Text = "IndeksTicari {0}".With(Engine.Versiyon());
     }
     private void subeAcMenuItem1_Click(object sender, EventArgs e)
     {
@@ -185,110 +187,196 @@ namespace Indeks.Views
      
     }
    
-
+    void AddPropertiesForm(Form frm)
+    {
+        frm.Dock = DockStyle.Fill;
+        frm.FormBorderStyle = FormBorderStyle.None;
+        frm.TopLevel = false;
+        frm.Parent = this;
+    }
+    private void ShowInTab(Form frm) {
+        bool exist = false;
+        foreach (TabPage t in closableTab1.TabPages)
+        {
+            if ("T" + frm.Name == t.Name)
+            {
+                closableTab1.SelectedTab = t;
+                exist = true;
+            }
+        }
+        if(!exist)
+        {
+            TabPage t = new TabPage(frm.Name);
+            t.Name ="T"+t.Text;
+            closableTab1.TabPages.Add(t);
+            t.Controls.Add(frm);
+            closableTab1.SelectedTab = t;
+            frm.Show();
+        }
+    }
     private void btnStok_Click_1(object sender, EventArgs e)
     {
       frmStok frm = new frmStok();
+      frm.Name = "STOK";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
       //frm.ShowDialog();
-      ShowForm(frm,true);
+      //ShowForm(frm,true);
     }
     private void musteriSiparisToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmSiparis frm = new frmSiparis(FTIRSIP.MusSip);
-      ShowForm(frm, true);
+      frm.Name = "MUSTERI SIPARIS";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void saticiSiparisToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmSiparis frm = new frmSiparis(FTIRSIP.SaticiSip);
-      ShowForm(frm, true);
+      frm.Name = "SATICI SIPARIS";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }     
     private void tsbtnSatisFat_Click(object sender, EventArgs e)
     {
       frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.SatisFat, FatNoTip.Fatura);
-      ShowForm(frm, true);
+      frm.Name = "SATIS FATURA";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void tsbtnAlisFat_Click(object sender, EventArgs e)
     {      
       frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.AlisFat, FatNoTip.Fatura);
-      ShowForm(frm, true);
+      frm.Name = "ALIS FATURA";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void tsbtnDirekSat_Click(object sender, EventArgs e)
     {
       frmDirektSatis frm = new frmDirektSatis();
-      ShowForm(frm, true);
+      frm.Name = "DIREKT SATIS";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void tsbtnCari_Click(object sender, EventArgs e)
     {
       frmCari frm = new frmCari();
-      ShowForm(frm, true);
+      frm.Name = "CARI";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void tsbtnKasa_Click(object sender, EventArgs e)
     {
       frmKasaKayitlari frm = new frmKasaKayitlari();
-      ShowForm(frm, false);
+      frm.Name = "KASA KAYITLARI";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, false);
     }
     private void stokKayıtToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmStok frm = new frmStok();
+      frm.Name = "STOK";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
       //frm.ShowDialog();
-      ShowForm(frm, true);
+      //ShowForm(frm, true);
     }
     private void stokHareketDokumuToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        frmStokHareketKriter frm = new frmStokHareketKriter(); ;
-        frm.Show();
+        frmStokHareketKriter frm = new frmStokHareketKriter();
+        frm.Name = "STOK HAREKET";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
     private void stokAlisSatisRaporuToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmStokAlisSatisRaporKriter frm = new frmStokAlisSatisRaporKriter(StokAlisSatisRapor.AlisRapor);
-      ShowForm(frm, false);
+      frm.Name = "STOK ALIS SATIS RAPORU";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+      //ShowForm(frm, false);
     }
     private void satisFaturasiToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.SatisFat, FatNoTip.Fatura);
-      ShowForm(frm, true);
+      frm.Name = "SATIS FATURA";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void alisFaturasiToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.AlisFat, FatNoTip.Fatura);
-      ShowForm(frm, true);
+      frm.Name = "ALIS FATURA";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void satisIrsaliyeToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.SatisIrs, FatNoTip.Irsaliye);
-      ShowForm(frm, true);
+      frm.Name = "SATIS IRSALIYE";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void alisIrsaliyeToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.AlisIrs, FatNoTip.Irsaliye);
-      ShowForm(frm, true);
+      frm.Name = "ALIS IRSALIYE";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void direktSatisToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmFatura frm = new frmFatura(FTIRSIP.DirektSatis, FatNoTip.Fatura);
-      ShowForm(frm, true);
+      frm.Name = "DIREKT SATIS";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void tsmMusteriSiparis_Click(object sender, EventArgs e)
     {
       frmSiparis frm = new frmSiparis(FTIRSIP.MusSip);
-      ShowForm(frm, true);
+      frm.Name = "MUSTERI SIPARIS";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void tsmSaticiSiparis_Click(object sender, EventArgs e)
     {
       frmSiparis frm = new frmSiparis(FTIRSIP.SaticiSip);
-      ShowForm(frm, true);
+      frm.Name = "SATICI SIPARIS";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, true);
     }
     private void cariKaydetToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmCari frm = new frmCari();
-      ShowForm(frm, true);
+      frm.Name = "CARI";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+      //ShowForm(frm, true);
     }
     private void cariHareketDokumuToolStripMenuItem_Click(object sender, EventArgs e)
     {       
         //frmGenelAlacakBorcKriter frm = new frmGenelAlacakBorcKriter(new frmGenelBorcAlacakRapor(), this);
         //ShowForm(frm, false);
         frmCariHareketDokumu frm = new frmCariHareketDokumu();
-        frm.Show();
+        frm.Name = "CARI HAREKET DOKUMU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
     private void genelBorcAlacakDokumuToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -297,13 +385,16 @@ namespace Indeks.Views
     }
     private void kasaKaydetToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      frmKasaTanimlama frm = new frmKasaTanimlama();
+      frmKasaTanimlama frm = new frmKasaTanimlama();   
       ShowForm(frm, false);     
     }
     private void kasaKayitlariToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmKasaKayitlari frm = new frmKasaKayitlari();
-      ShowForm(frm, false);
+      frm.Name = "KASA KAYITLARI";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, false);
     }
     private void kasaHareketDokumuToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -436,17 +527,26 @@ namespace Indeks.Views
 
     private void stokSatisRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmStokAlisSatisRaporKriter frm = new frmStokAlisSatisRaporKriter(StokAlisSatisRapor.SatisRapor);
-        ShowForm(frm, false);
+        frm.Name = "STOK ALIS SATIS RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //ShowForm(frm, false);
     }
 
     private void StokAlisMaliyetRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmStokMaliyetRaporu frm = new frmStokMaliyetRaporu();
-        frm.Show();
+        frm.Name = "STOK ALIS MALIYET RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void StokSatisMaliyetRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmStokMaliyetRaporu frm = new frmStokMaliyetRaporu();
-        frm.Show();
+        frm.Name = "STOK SATIS MALIYET RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void ayAyKasaRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -456,32 +556,50 @@ namespace Indeks.Views
 
     private void satisIrsaliyesiToolStripMenuItem_Click(object sender, EventArgs e) {
         frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.SatisIrs, FatNoTip.Irsaliye);
-        ShowForm(frm, true);
+        frm.Name = "SATIS IRSALIYE";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //ShowForm(frm, true);
     }
 
     private void alisIrsaliyesiToolStripMenuItem_Click(object sender, EventArgs e) {
         frmFatura frm = new frmFatura(Indeks.Data.BusinessObjects.FTIRSIP.AlisIrs, FatNoTip.Irsaliye);
-        ShowForm(frm, true);
+        frm.Name = "ALIS IRSALIYE";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //ShowForm(frm, true);
     }
 
     private void faturaRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmFaturaRapor frm = new frmFaturaRapor(true);
-        frm.Show();
+        frm.Name = "FATURA RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void irsaliyeRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmFaturaRapor frm = new frmFaturaRapor(false);
-        frm.Show();
+        frm.Name = "IRSALIYE RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void siparisRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmSiparisRapor frm = new frmSiparisRapor();
-        frm.Show();
+        frm.Name = "SIPARIS RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void cekRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmCekRapor frm = new frmCekRapor();
-        frm.Show();
+        frm.Name = "CEK RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void senetRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -568,7 +686,7 @@ namespace Indeks.Views
         try {
             if (!first) {
                 Process prc = new Process();
-                prc.StartInfo.FileName = linkLabel1.Text;
+                //prc.StartInfo.FileName = linkLabel1.Text;
                 prc.Start();
                 first = false;
             }

@@ -93,7 +93,7 @@ namespace Indeks.Views
     public static string Versiyon() {
         try {
             System.Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            return version.Major + "." + version.Minor + "." + version.Build + "." + version.Revision;
+            return version.Major + "." + version.Minor + "." + version.Build ;
         } catch (Exception) {
             return "?.?.?";
         }
