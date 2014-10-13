@@ -381,7 +381,10 @@ namespace Indeks.Views
     private void genelBorcAlacakDokumuToolStripMenuItem_Click(object sender, EventArgs e)
     {
         frmCariGenelBorcAlacakDokumu frm = new frmCariGenelBorcAlacakDokumu();
-        frm.Show();
+        frm.Name = "CARI GENEL BORC ALACAK RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
     private void kasaKaydetToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -399,7 +402,10 @@ namespace Indeks.Views
     private void kasaHareketDokumuToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmKasaHareketDokumu frm = new frmKasaHareketDokumu(this);
-      ShowForm(frm, false);
+      frm.Name = "KASA HAREKET DOKUMU";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm, false);
     }
     private void subeToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -433,7 +439,10 @@ namespace Indeks.Views
     private void stokDurumRaporuToolStripMenuItem_Click(object sender, EventArgs e)
     {
         frmStokDurumRaporu frm = new frmStokDurumRaporu();
-      ShowForm(frm,false);
+        frm.Name = "STOK DURUM RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //ShowForm(frm,false);
     }
     private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
     {
@@ -479,7 +488,10 @@ namespace Indeks.Views
     private void hareketRaporToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmBankaHareketRapor frm = new frmBankaHareketRapor();
-      ShowForm(frm,false);
+      frm.Name = "BANKA HAREKET RAPORU";
+      AddPropertiesForm(frm);
+      ShowInTab(frm);
+        //ShowForm(frm,false);
     }
 
     private void tsmGelenHavale_Click(object sender, EventArgs e)
@@ -512,17 +524,26 @@ namespace Indeks.Views
 
     private void gunVeGunKasaRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmGunGunKasaRaporKriter frm = new frmGunGunKasaRaporKriter();
-        ShowForm(frm,false);
+        frm.Name = "GUNLUK KASA RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //ShowForm(frm,false);
     }
 
     private void ozelGelirRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmOzelGelirGiderRapor frm = new frmOzelGelirGiderRapor(GelirGider.Gelir);
-        frm.Show();
+        frm.Name = "OZEL GELIR RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void ozelGiderRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmOzelGelirGiderRapor frm = new frmOzelGelirGiderRapor(GelirGider.Gider);
-        frm.Show();
+        frm.Name = "OZEL GIDER RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void stokSatisRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -551,7 +572,10 @@ namespace Indeks.Views
 
     private void ayAyKasaRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmAyAyKasaRaporu frm = new frmAyAyKasaRaporu();
-        frm.Show();
+        frm.Name = "AYLIK KASA RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void satisIrsaliyesiToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -604,7 +628,10 @@ namespace Indeks.Views
 
     private void senetRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmSenetRapor frm = new frmSenetRapor();
-        frm.Show();
+        frm.Name = "SENET RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
     string GetDbFiledirectory() {
         string dbDir = Engine.GetConString();
@@ -699,7 +726,10 @@ namespace Indeks.Views
 
     private void genelDurumRaporuToolStripMenuItem_Click(object sender, EventArgs e) {
         frmGenelDurumRaporu frm = new frmGenelDurumRaporu();
-        frm.Show();
+        frm.Name = "GENEL DURUM RAPORU";
+        AddPropertiesForm(frm);
+        ShowInTab(frm);
+        //frm.Show();
     }
 
     private void yardimToolStripMenuItem_Click(object sender, EventArgs e) {       
