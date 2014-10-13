@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+	<class name="Indeks.Data.BusinessObjects.Cari, Indeks.Data" table="Cari" lazy="true">
+		<id name="Id" column="CARI_KODU">
+		 	<generator class="assigned" />
+		</id>
+		<property name="CariIsim" column="CARI_ISIM" />
+		<property name="CariTel" column="CARI_TEL" />
+		<property name="CariAdres" column="CARI_ADRES" />
+		<property name="CariEmail" column="CARI_EMAIL" />
+    <property name="CariTip" column="CariTip" />
+    <property name="VergiDairesi" column="VergiDairesi" />
+    <property name="VergiNumarasi" column="VergiNumarasi" />
+    <property name="Fax" column="Fax" />
+    <property name="WebAdresi" column="WebAdresi" />
+    <property name="Il" column="Il" />
+    <property name="Ilce" column="Ilce" />
+    <property name="CepTel" column="CEP_TEL" />
+    <property name="YetkiliKisi" column="YetkiliKisi" />
+    <property name="KayitTarih" column="KayitTarih" />
+    <property name="SubelerdeOrtak" column="SubelerdeOrtak" />
+    <property name="SatisFiyatKod" column="SatisFiyatKod" />
+    <property name="AlisFiyatKod" column="AlisFiyatKod" />
+    <property name="Aktif" column="Aktif" />
+		<many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+    <many-to-one name="Grup1" column="Grup1" class="CariCategory" />
+    <many-to-one name="Grup2" column="Grup2" class="CariCategory" />
+    <many-to-one name="Grup3" column="Grup3" class="CariCategory" />
+    <many-to-one name="Grup4" column="Grup4" class="CariCategory" />
+		<bag name="CariHarekets" lazy="true" cascade="save-update" inverse="true" >
+			<key column="CariKodu"></key>
+			<one-to-many class="CariHareket"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.Senet, Indeks.Data" table="Senet" lazy="true">
+    <id name="Id" column="SenetId">
+      <generator class="native" />
+    </id>
+    <property name="CariKodu" column="CariKodu"/>
+    <property name="SenetTip" column="SenetTip" />
+    <property name="SenetDurum" column="SenetDurum" />
+    <property name="IslemTarih" column="IslemTarih" />
+    <property name="VadeTarih" column="VadeTarih" />
+    <property name="Tutar" column="Tutar" />
+    <property name="SenetNo" column="SenetNo" />
+    <property name="AsilSahibi" column="AsilSahibi" />
+    <property name="Kefil1" column="Kefil1" />
+    <property name="Kefil2" column="Kefil2" />
+    <property name="Aciklama" column="Aciklama" />
+    <property name="DurumKasaKod" column="DurumKasaKod" />
+    <property name="DurumCariKod" column="DurumCariKod" />
+    <property name="DurumBankaHesapNo" column="DurumBankaHesapNo" />
+    <property name="KayitTarih" column="KayitTarih" />   
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+  </class>
+</hibernate-mapping>

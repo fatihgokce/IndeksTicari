@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.Ayarlar, Indeks.Data" table="Ayarlar" lazy="true">
+      <composite-id>
+      <key-property name="Ad" column="Ad" />
+      <key-property name="SubeKodu" column="SUBE_KODU" />
+    </composite-id>
+    <property name="Deger1" column="Deger1" />
+    <property name="Deger2" column="Deger2" />
+    <property name="SubelerdeOrtak" column="SubelerdeOrtak" />    
+  </class>
+</hibernate-mapping>

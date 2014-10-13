@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.StokBirim, Indeks.Data" table="StokBirim" lazy="true">
+    <id name="Id" column="BirimId">
+      <generator class="native" />
+    </id>
+    <property name="Birim" column="Birim" />
+   
+  </class>
+</hibernate-mapping>

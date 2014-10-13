@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+	<class name="Indeks.Data.BusinessObjects.FatIrsUst, Indeks.Data" table="FatIrsUst" lazy="true">
+		<id name="Id" column="INCKEYNO">
+		 	<generator class="native" />
+		</id>
+		<property name="Ftirsip" column="FTIRSIP" />
+		<property name="FatirsNo" column="FATIRSNO" />
+		<property name="Tarih" column="TARIH" />
+		<property name="FatTipi" column="FAT_TIPI" />
+    <property name="KdvDahilmi" column="KDV_DAHILMI" />
+    <property name="CariKodu" column="CARI_KODU" />
+    <property name="KdvTutar" column="KdvTutar" />
+    <property name="BrutTutar" column="BrutTutar" />
+    <property name="GenelToplam" column="GenelToplam" />
+    <property name="SatirIsk" column="SatirIsk" />
+    <property name="KasaKodu" column="KasaKodu" />
+    <property name="Irsaliyeli" column="Irsaliyeli" />
+    <property name="IrsaliyeNo" column="IrsaliyeNo" />
+    <property name="SevkTarihi" column="SevkTarihi" />
+    <property name="Kapatilmis" column="Kapatilmis" />
+    <property name="VadeTarih" column="VadeTarih" />
+    <property name="HesapNo" column="HesapNo" />
+		<many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+	
+	</class>
+</hibernate-mapping>

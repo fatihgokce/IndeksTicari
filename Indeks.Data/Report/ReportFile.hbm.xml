@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <sql-query name="spStokMiktarName">
+    <return-scalar column="stokMiktar" type="Double" />
+    exec spStokMiktar :StokKodu
+  </sql-query>
+  <sql-query name="GenelBorcAlacakRapor">
+    <return-scalar column="CariKod" type="String" />
+    <return-scalar column="CariIsim" type="String" />
+    <return-scalar column="Telefon" type="String" />
+    <return-scalar column="Borc" type="Double" />
+    <return-scalar column="Alacak" type="Double" />
+    <return-scalar column="BorcBak" type="Double" />
+    <return-scalar column="AlacakBak" type="Double" />
+    exec spCariGenelBorcAlacak :startDate,:finishDate,:subeKodu
+  </sql-query>
+  <sql-query name="StokDurumRapor">
+    <return-scalar column="STOK_KODU" type="String" />
+    <return-scalar column="STOK_ADI" type="String" />
+    <return-scalar column="stokMiktar" type="Double" />
+    exec spStokDurumRapor
+  </sql-query>
+</hibernate-mapping>

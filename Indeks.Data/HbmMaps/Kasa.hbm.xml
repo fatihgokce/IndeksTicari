@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.Kasa, Indeks.Data" table="Kasa" lazy="true">
+    <id name="Id" column="KASA_KOD">
+      <generator class="assigned" />
+    </id>
+    <property name="KasaIsmi" column="KASA_ISMI" />
+    <property name="SonDevirTarih" column="SONDEVIR_TARIH" />
+    <property name="SonDevirTutar" column="SONDEVIR_TUTAR" />
+    <property name="DovizTipi" column="DovizTipi" />
+    <property name="KayitTarih" column="KAYIT_TARIH" />
+    <property name="SubelerdeOrtak" column="SubelerdeOrtak" />
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+   
+    <bag name="KasaHarekets" lazy="true" cascade="save-update" inverse="true" >
+      <key column="KASA_KOD"></key>
+      <one-to-many class="KasaHareket"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

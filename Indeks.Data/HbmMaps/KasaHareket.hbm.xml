@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.KasaHareket, Indeks.Data" table="KasaHareket" lazy="true">
+    <id name="Id" column="INCKEYNO">
+      <generator class="native" />
+    </id>
+    <property name="GelirGider" column="GELIR_GIDER" />
+    <property name="FisNo" column="FISNO" />
+    <property name="KulNo" column="KUL_NO" />
+    <property name="KdvTutar" column="KDV_TUTAR" />
+    <property name="KdvOrani" column="KDV_ORANI" />
+    <property name="Tip" column="TIP" />
+    <property name="Tutar" column="Tutar" />
+    <property name="Aciklama" column="Aciklama" />
+    <property name="Tarih" column="Tarih" />
+    <property name="DirektSatis" column="DirektSatis" />
+    <property name="CekSenetId" column="CekSenetId" />
+    <property name="OzelGelirGiderKod" column="OzelGelirGiderKod"/>
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+    <many-to-one name="Kasa" column="KASA_KOD" class="Kasa" />   
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <import class="Indeks.Data.Report.StokHarRpr"/>
+  <class name="Indeks.Data.BusinessObjects.SiparisKalem, Indeks.Data" table="SiparisKalem" lazy="true">
+    <id name="Id" column="INCKEYNO">
+      <generator class="native" />
+    </id>
+    
+    <property name="GCMik" column="GCMIK" />
+    <property name="GCKod" column="GCKOD" />
+    <property name="Tarih" column="TARIH" />
+    <property name="BirimFiyat" column="BIRIM_FIYAT" />
+    <property name="KdvOrani" column="KdvOrani" />
+    <property name="FisNo" column="FisNo" />
+    <property name="Isk1" column="SATISK1" />
+    <property name="Isk2" column="SATISK2" />
+    <property name="Isk3" column="SATISK3" />
+    <property name="Isk4" column="SATISK4" />
+    <property name="Isk5" column="SATISK5" />
+    <property name="Ftirsip" column="FTIRSIP" />
+    <property name="HareketBirim" column="HareketBirim" />
+    <property name="HareketMiktar" column="HareketMiktar" />
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+    <many-to-one name="Stok" column="STOK_KODU" class="Stok" />
+    
+  </class>
+</hibernate-mapping>

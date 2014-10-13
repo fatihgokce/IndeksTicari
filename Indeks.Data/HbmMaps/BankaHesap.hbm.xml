@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.BankaHesap, Indeks.Data" table="BankaHesap" lazy="true">
+    <id name="Id" column="HesapId">
+      <generator class="native" />
+    </id>
+    <property name="HesapNo" column="HesapNo" />
+    <property name="BankaAdi" column="BankaAdi" />
+    <property name="HesapSahibi" column="HesapSahibi" />
+    <property name="ParaBirimi" column="ParaBirimi" />
+    <property name="SubeAdi" column="SubeAdi" />
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />   
+  </class>
+</hibernate-mapping>

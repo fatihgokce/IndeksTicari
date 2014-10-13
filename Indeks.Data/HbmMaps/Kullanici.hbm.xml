@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+	<class name="Indeks.Data.BusinessObjects.Kullanici, Indeks.Data" table="Kullanici" lazy="true">
+		<id name="Id" column="USER_NO">
+		 	<generator class="native" />
+		</id>
+		<property name="UserName" column="USER_NAME" />
+		<property name="Password" column="PASSWORD" />
+		<property name="Adminmi" column="ADMINMI" />
+    <property name="SubelerdeOrtak" column="SubelerdeOrtak" />
+		<many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+	</class>
+</hibernate-mapping>

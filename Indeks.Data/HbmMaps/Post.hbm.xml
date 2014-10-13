@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.Post, Indeks.Data" table="Post" lazy="true">
+    <id name="Id" column="PostId">
+      <generator class="native" />
+    </id>
+    <property name="HesabaGecisTarih" column="HesabaGecisTarih" />
+    <property name="KesintiOran" column="KesintiOran" />
+    <many-to-one name="Hesap" column="HesapId" class="BankaHesap" />
+  </class>
+</hibernate-mapping>

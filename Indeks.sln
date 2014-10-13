@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeks.Data", "Indeks.Data\Indeks.Data.csproj", "{1EDDE320-1175-44CB-8CD4-372CF6217034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeks.Views", "Indeks.Views\Indeks.Views.csproj", "{21354711-947D-49AD-90C6-1768F4183E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indeks.Print", "Indeks.Print\Indeks.Print.csproj", "{4787356A-B40A-44D6-B449-0B7365B39557}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndeksControl", "IndeksControl\IndeksControl.csproj", "{C76C848F-C278-4191-93C7-DD1E2D1545AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EDDE320-1175-44CB-8CD4-372CF6217034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDDE320-1175-44CB-8CD4-372CF6217034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDDE320-1175-44CB-8CD4-372CF6217034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDDE320-1175-44CB-8CD4-372CF6217034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21354711-947D-49AD-90C6-1768F4183E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21354711-947D-49AD-90C6-1768F4183E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21354711-947D-49AD-90C6-1768F4183E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21354711-947D-49AD-90C6-1768F4183E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4787356A-B40A-44D6-B449-0B7365B39557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4787356A-B40A-44D6-B449-0B7365B39557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4787356A-B40A-44D6-B449-0B7365B39557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4787356A-B40A-44D6-B449-0B7365B39557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C76C848F-C278-4191-93C7-DD1E2D1545AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C76C848F-C278-4191-93C7-DD1E2D1545AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C76C848F-C278-4191-93C7-DD1E2D1545AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C76C848F-C278-4191-93C7-DD1E2D1545AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

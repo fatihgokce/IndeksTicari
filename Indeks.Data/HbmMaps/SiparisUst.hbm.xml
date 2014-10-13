@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.SiparisUst, Indeks.Data" table="SiparisUst" lazy="true">
+    <id name="Id" column="INCKEYNO">
+      <generator class="native" />
+    </id>
+    <property name="Ftirsip" column="FTIRSIP" />
+    <property name="FatirsNo" column="FATIRSNO" />
+    <property name="Tarih" column="TARIH" />
+    <property name="TeslimTarih" column="TESLIM_TARIH" />
+    <property name="KdvDahilmi" column="KDV_DAHILMI" />
+    <property name="CariKodu" column="CARI_KODU" />
+    <property name="KdvTutar" column="KdvTutar" />
+    <property name="BrutTutar" column="BrutTutar" />
+    <property name="GenelToplam" column="GenelToplam" />
+    <property name="SatirIsk" column="SatirIsk" />
+    <property name="Kapatilmis" column="Kapatilmis" />
+    <property name="VadeTarih" column="VadeTarih" />   
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+   
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+	<class name="Indeks.Data.BusinessObjects.Stok, Indeks.Data" table="Stok" lazy="true">
+		<id name="Id" column="STOK_KODU">
+		 	<generator class="assigned" />
+		</id>    
+		<property name="StokAdi" column="STOK_ADI" />
+		<property name="KdvOrani" column="KDV_ORANI" />
+		<property name="AzamiMiktar" column="AZAMI_MIKTAR" />
+		<property name="AsgariMiktar" column="ASGARI_MIKTAR" />
+		<property name="Barkod1" column="BARKOD1" />
+		<property name="Barkod2" column="BARKOD2" />
+		<property name="Barkod3" column="BARKOD3" />
+    <property name="KayitTarih" column="KayitTarih" />
+    <property name="AlisFiyat1" column="AlisFiyat1" />
+    <property name="AlisFiyat2" column="AlisFiyat2" />
+    <property name="AlisFiyat3" column="AlisFiyat3" />
+    <property name="SatisFiyat1" column="SatisFiyat1" />
+    <property name="SatisFiyat2" column="SatisFiyat2" />
+    <property name="SatisFiyat3" column="SatisFiyat3" />
+    <property name="AnaBirim" column="AnaBirim" />
+    <property name="AltBirim1" column="AltBirim1" />
+    <property name="AltBirim2" column="AltBirim2" />
+    <property name="AltBirim3" column="AltBirim3" />
+    <property name="Carpan1" column="Carpan1" />
+    <property name="Carpan2" column="Carpan2" />
+    <property name="Carpan3" column="Carpan3" />
+    <property name="SubelerdeOrtak" column="SubelerdeOrtak" />
+    <property name="Aktif" column="Aktif" />
+    <property name="AlisKdvOrani" column="AlisKdvOrani" />
+    <property name="SatisKdvOrani" column="SatisKdvOrani" />
+		<many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+		<many-to-one name="Grup1" column="Grup1" class="StokCategory" />
+		<many-to-one name="Grup2" column="Grup2" class="StokCategory" />
+		<many-to-one name="Grup3" column="Grup3" class="StokCategory" />
+		<many-to-one name="Grup4" column="Grup4" class="StokCategory" />
+		<many-to-one name="Grup5" column="Grup5" class="StokCategory" />
+		
+		<bag name="StokHarekets" lazy="true" cascade="all" inverse="true" >
+			<key column="STOK_KODU"></key>
+			<one-to-many class="StokHareket"></one-to-many>
+		</bag>
+	</class>
+</hibernate-mapping>

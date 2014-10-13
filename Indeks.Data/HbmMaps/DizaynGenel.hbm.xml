@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.DizaynGenel, Indeks.Data" table="DizaynGenel" lazy="true">
+    <id name="Id" column="GenelId">
+      <generator class="native" />
+    </id>
+    <property name="SatSay" column="SatSay" />
+    <property name="SutSay" column="SutSay" />
+    <property name="MaxKalemAdedi" column="MaxKalemAdedi" />
+    <property name="KalBasSat" column="KalBasSat" />
+    <property name="TopKalSonunda" column="TopKalSonunda" />
+    <property name="TopBasSat" column="TopBasSat" />
+    <property name="BasimAdedi" column="BasimAdedi" />
+    <property name="BaskiOnizleme" column="BaskiOnizleme" />
+    <property name="FontBuyukluk" column="FontBuyukluk" />
+    <property name="FontAdi" column="FontAdi" />
+    <property name="YaziciAdi" column="YaziciAdi" />
+    <property name="Yataymi" column="Yataymi" />
+    <many-to-one name="Dizayn" column="DizaynNo" class="Dizayn" />
+    <bag name="DizaynKalems" lazy="true" cascade="save-update" inverse="true" >
+      <key column="GenelId"></key>
+      <one-to-many class="DizaynKalem"></one-to-many>
+    </bag>
+  </class>
+</hibernate-mapping>

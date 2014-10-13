@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.CariHareket, Indeks.Data" table="CariHareket" lazy="true">
+    <id name="Id" column="CariHarId">
+      <generator class="native" />
+    </id>
+    <property name="FisNo" column="FisNo" />
+    <property name="Borc" column="Borc" />
+    <property name="Alacak" column="Alacak" />
+    <property name="Tarih" column="Tarih" />
+    <property name="HareketTuru" column="HareketTuru" />
+    <property name="VadeTarih" column="VadeTarih" />
+    <property name="Aciklama" column="Aciklama" />
+    <property name="CekSenetId" column="CekSenetId" />
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+    <many-to-one name="Cari" column="CariKodu" class="Cari" />
+  </class>
+</hibernate-mapping>

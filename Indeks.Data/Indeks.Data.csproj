@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1EDDE320-1175-44CB-8CD4-372CF6217034}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Indeks.Data</RootNamespace>
+    <AssemblyName>Indeks.Data</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BusinessBase.cs" />
+    <Compile Include="Base\DataBaseInfo.cs" />
+    <Compile Include="Base\KodIsim.cs" />
+    <Compile Include="Base\ManagerBase.cs" />
+    <Compile Include="Base\NHibernateSession.cs" />
+    <Compile Include="Base\NHibernateSessionManager.cs" />
+    <Compile Include="Base\SessionSimple.cs" />
+    <Compile Include="BusinessObjects\AuditLogRecord.cs" />
+    <Compile Include="BusinessObjects\Ayarlar.cs" />
+    <Compile Include="BusinessObjects\Banka.cs" />
+    <Compile Include="BusinessObjects\BankaHesap.cs" />
+    <Compile Include="BusinessObjects\Cari.cs" />
+    <Compile Include="BusinessObjects\CariCategory.cs" />
+    <Compile Include="BusinessObjects\CariHareket.cs" />
+    <Compile Include="BusinessObjects\Cek.cs" />
+    <Compile Include="BusinessObjects\Dizayn.cs" />
+    <Compile Include="BusinessObjects\DizaynGenel.cs" />
+    <Compile Include="BusinessObjects\DizaynKalem.cs" />
+    <Compile Include="BusinessObjects\FatIrsUst.cs" />
+    <Compile Include="BusinessObjects\FaturaNo.cs" />
+    <Compile Include="BusinessObjects\HesapHareket.cs" />
+    <Compile Include="BusinessObjects\IL.cs" />
+    <Compile Include="BusinessObjects\ILce.cs" />
+    <Compile Include="BusinessObjects\Kasa.cs" />
+    <Compile Include="BusinessObjects\KasaHareket.cs" />
+    <Compile Include="BusinessObjects\Kullanici.cs" />
+    <Compile Include="BusinessObjects\Kur.cs" />
+    <Compile Include="BusinessObjects\OzelGelirGider.cs" />
+    <Compile Include="BusinessObjects\ParaBirimi.cs" />
+    <Compile Include="BusinessObjects\Post.cs" />
+    <Compile Include="BusinessObjects\Senet.cs" />
+    <Compile Include="BusinessObjects\SiparisKalem.cs" />
+    <Compile Include="BusinessObjects\SiparisUst.cs" />
+    <Compile Include="BusinessObjects\Stok.cs" />
+    <Compile Include="BusinessObjects\StokBirim.cs" />
+    <Compile Include="BusinessObjects\StokCategory.cs" />
+    <Compile Include="BusinessObjects\StokHareket.cs" />
+    <Compile Include="BusinessObjects\Sube.cs" />
+    <Compile Include="Helper\ExtensionHelper.cs" />
+    <Compile Include="Helper\FatNoTip.cs" />
+    <Compile Include="Helper\FaturaIrsaliyeDurumlari.cs" />
+    <Compile Include="Helper\FaturaTipDurum.cs" />
+    <Compile Include="Helper\KasaHareketDurumlari.cs" />
+    <Compile Include="Helper\SiparisDurum.cs" />
+    <Compile Include="Helper\SqlTypeHelper.cs" />
+    <Compile Include="Helper\StHarHTur.cs" />
+    <Compile Include="Helper\StokHareketleriDurumu.cs" />
+    <Compile Include="ManagerObjects\AyarlarManager.cs" />
+    <Compile Include="ManagerObjects\BankaHesapManager.cs" />
+    <Compile Include="ManagerObjects\BankaManager.cs" />
+    <Compile Include="ManagerObjects\CariCategoryManager.cs" />
+    <Compile Include="ManagerObjects\CariHareketManager.cs" />
+    <Compile Include="ManagerObjects\CariManager.cs" />
+    <Compile Include="ManagerObjects\CekManager.cs" />
+    <Compile Include="ManagerObjects\DizaynGenelManager.cs" />
+    <Compile Include="ManagerObjects\DizaynKalemManager.cs" />
+    <Compile Include="ManagerObjects\DizaynManager.cs" />
+    <Compile Include="ManagerObjects\FatIrsUstManager.cs" />
+    <Compile Include="ManagerObjects\FatNoManager.cs" />
+    <Compile Include="ManagerObjects\HesapHareketManager.cs" />
+    <Compile Include="ManagerObjects\ILManager.cs" />
+    <Compile Include="ManagerObjects\KasaHarManager.cs" />
+    <Compile Include="ManagerObjects\KasaManager.cs" />
+    <Compile Include="ManagerObjects\KullaniciManager.cs" />
+    <Compile Include="ManagerObjects\KurManager.cs" />
+    <Compile Include="ManagerObjects\ManagerFactory.cs" />
+    <Compile Include="ManagerObjects\OzelGelirGiderManager.cs" />
+    <Compile Include="ManagerObjects\PostManager.cs" />
+    <Compile Include="ManagerObjects\SenetManager.cs" />
+    <Compile Include="ManagerObjects\SiparisKalemManager.cs" />
+    <Compile Include="ManagerObjects\SiparisUstManager.cs" />
+    <Compile Include="ManagerObjects\StokBirimManager.cs" />
+    <Compile Include="ManagerObjects\StokCategoryManager.cs" />
+    <Compile Include="ManagerObjects\StokHareketManager.cs" />
+    <Compile Include="ManagerObjects\StokManager.cs" />
+    <Compile Include="ManagerObjects\SubeManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\KasaGunlukGelirGider.cs" />
+    <Compile Include="Report\StokHarRpr.cs" />
+    <Compile Include="Utils\Check.cs" />
+    <Compile Include="Utils\ExtensionHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HbmMaps\Ayarlar.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Banka.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\BankaHesap.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Cari.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\CariCategory.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\CariHareket.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Cek.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Dizayn.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\DizaynGenel.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\DizaynKalem.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\FatIrsUst.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\HesapHareket.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\IL.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\ILce.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Kasa.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\KasaHareket.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Kullanici.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Kur.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\OzelGelirGider.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Post.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Senet.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\SiparisKalem.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\SiparisUst.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Stok.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\StokBirim.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\StokCategory.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\StokHareket.hbm.xml" />
+    <EmbeddedResource Include="HbmMaps\Sube.hbm.xml" />
+    <Content Include="Report\ReportFile.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

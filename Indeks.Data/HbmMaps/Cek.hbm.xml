@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.Cek, Indeks.Data" table="Cek" lazy="true">
+    <id name="Id" column="CekId">
+      <generator class="native" />
+    </id>
+    <property name="CekTip" column="CekTip" />
+    <property name="CekDurum" column="CekDurum" />
+    <property name="CariKodu" column="CariKodu" />
+    <property name="IslemTarih" column="IslemTarih" />
+    <property name="VadeTarih" column="Vadetarih" />
+    <property name="Banka" column="Banka" />
+    <property name="SubeAdi" column="SubeAdi" />
+    <property name="HesapNo" column="HesapNo" />
+    <property name="CekNo" column="CekNo" />
+    <property name="AsilSahibi" column="AsilSahibi" />
+    <property name="Aciklama" column="Aciklama" />
+    <property name="Tutar" column="Tutar" />
+    <property name="KayitTarih" column="KayitTarih" />
+    <property name="DurumKasaKod" column="DurumKasaKod" />
+    <property name="DurumCariKod" column="DurumCariKod" />
+    <property name="DurumBankaHesapNo" column="DurumBankaHesapNo" />
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+  </class>
+</hibernate-mapping>

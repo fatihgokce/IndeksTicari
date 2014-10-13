@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Indeks.Data.BusinessObjects" assembly="Indeks.Data">
+  <class name="Indeks.Data.BusinessObjects.HesapHareket, Indeks.Data" table="HesapHareket" lazy="true">
+    <id name="Id" column="BankaHareketId">
+      <generator class="native" />
+    </id>
+    <property name="Tarih" column="Tarih" />
+    <property name="DekontNo" column="DekontNo" />
+    <property name="Tutar" column="Tutar" />
+    <property name="Aciklama" column="Aciklama" />
+    <property name="HareketTuru" column="HareketTuru" />
+    <property name="KasaKod" column="KasaKod" />
+    <property name="KasaHarId" column="KasaHarId" />
+    <property name="CariKod" column="CariKod" />
+    <property name="CariHarId" column="CariHarId" />
+    <property name="FisNo" column="FisNo" />
+    <property name="CekSenetId" column="CekSenetId" />
+    <many-to-one name="Sube" column="SUBE_KODU" class="Sube" />
+    <many-to-one name="BankaHesap" column="HesapId" class="BankaHesap" />
+    
+  </class>
+</hibernate-mapping>
