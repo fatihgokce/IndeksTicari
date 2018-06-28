@@ -1,0 +1,77 @@
+﻿<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+xmlns:x='urn:schemas-microsoft-com:office:excel'
+xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<style>
+@page{margin:.5in .75in .5in .75in;
+mso-header-margin:.5in;
+mso-footer-margin:.5in;
+mso-page-orientation:landscape;}
+@print { mso-print-title-row:"$1:$7"; }thead { display:table-header-group; }tbody { display:table-body-group; }tfoot { display:table-footer-group; }</style>
+<!--[if gte mso 9]><xml>
+<x:ExcelWorkbook>
+<x:ExcelWorksheets>
+<x:ExcelWorksheet>
+<x:Name>Cari Hareket Dokümü</x:Name>
+<x:WorksheetOptions>
+
+                <x:FreezePanes/>
+                <x:FrozenNoSplit/>
+                <x:SplitHorizontal>8</x:SplitHorizontal>
+                <x:TopRowBottomPane>8</x:TopRowBottomPane><x:FitToPage/>
+<x:Print>
+<x:FitHeight>999</x:FitHeight>
+<x:ValidPrinterInfo/>
+<x:PaperSizeIndex>9</x:PaperSizeIndex>
+<x:Scale>67</x:Scale>
+<x:HorizontalResolution>600</x:HorizontalResolution
+<x:VerticalResolution>600</x:VerticalResolution
+</x:Print>
+<x:Selected/>
+<x:DoNotDisplayGridlines/>
+<x:ProtectContents>False</x:ProtectContents>
+<x:ProtectObjects>False</x:ProtectObjects>
+<x:ProtectScenarios>False</x:ProtectScenarios>
+</x:WorksheetOptions>
+</x:ExcelWorksheet>
+</x:ExcelWorksheets>
+<x:WindowHeight>12780</x:WindowHeight>
+<x:WindowWidth>19035</x:WindowWidth>
+<x:WindowTopX>0</x:WindowTopX>
+<x:WindowTopY>15</x:WindowTopY>
+<x:ProtectStructure>False</x:ProtectStructure>
+<x:ProtectWindows>False</x:ProtectWindows>
+</x:ExcelWorkbook>
+</xml><![endif]-->
+</head><body>
+
+<html><head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1254"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-9">
+<style type='text/css'>
+
+                    .htmlReport { font: 10px Verdana; }
+                    .htmlReport td { font-size: 10px; }
+                    .htmlReport th { font-size: 10px; font-weight: bold; text-decoration: underline; text-align: left; }
+                    .htmlReport h1 { font-size: 14pt; margin-bottom: 10px; }
+
+</style>
+</head><body>
+<div class='htmlReport'>
+<center><h4 style='margin-bottom: 1px;'>Cari Hareket Dokümü</h4></center><b><br />            Rapor Tarihi:28.06.2018 17:20:20<br />            Rapor Tarih Aralığı:Bütün Tarihler<br />            Cari:Bütün Cariler         <br />            </b><br /><br /><table border='0' cellpadding='2' cellspacing='0' width='100%'>
+<thead>
+<tr>
+<th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Cari Kod</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Cari Isim</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Telefon</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Cep Telefonu</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Adres</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Fis No</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Hareket Turu</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Borc</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Alacak</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Tarih</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Vade Tarih</th><th style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;' align='left'>Aciklama</th></tr>
+</thead>
+<tbody>
+<tr style='background-color:Wheat !important'>
+<td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>0002</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>Ataman Ezca &  Deposu San. ve Tic. Ltd. Şti.</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>(212) 866-8700</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>(212) 866-8734</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>İstiklal Mah. Atatürk Cad. Ekin Sok. No:5 34522</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>VerilenÇek</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>300,00</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>0,00</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>28.06.2018</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>28.06.2018</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'>2 çek no ile borçlu</td></tr>
+<tfoot>
+<tr style='background-color:SandyBrown   !important'>
+<td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;;color:black;font-weight:bold;font-size:13px'>300</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;;color:black;font-weight:bold;font-size:13px'>0</td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td><td style='font-weight: normal;text-decoration: none;font-style: none;text-align: Left;vertical-align: Top;'></td></tr>
+</tfoot>
+</tbody>
+</table>
+<p style='font-weight: normal;text-decoration: none;font-style: italic;text-align: Left;vertical-align: Middle;'></p></div>
+</body>
+</html>

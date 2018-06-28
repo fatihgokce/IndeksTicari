@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <DataBase>SqlLite</DataBase>
+  <ConnectionString></ConnectionString>
+  <Paket>Pro</Paket>
+  <Kurulum>0</Kurulum>
+</Settings>

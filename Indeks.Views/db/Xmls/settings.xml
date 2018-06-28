@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <DataBase>SqlLite</DataBase>
+  <ConnectionString>Data Source=D:\Project2010\Han\HanForm\bin\Debug\Db\Indeks.db;Version=3;</ConnectionString>
+  <Paket>Pro</Paket>
+  <Kurulum>1</Kurulum>
+</Settings>

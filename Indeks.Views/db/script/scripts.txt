@@ -1,0 +1,1062 @@
+﻿USE [master]
+GO
+/****** Object:  Database [#DataBaseName#]    Script Date: 05/17/2010 21:03:00 ******/
+CREATE DATABASE [#DataBaseName#] ON  PRIMARY 
+( NAME = N'#DataBaseName#', FILENAME = N'#PathMdf#' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'HAN_log', FILENAME = N'#PathLdf#' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+ COLLATE SQL_Latin1_General_CP1_CI_AS
+GO
+EXEC dbo.sp_dbcmptlevel @dbname=N'#DataBaseName#', @new_cmptlevel=90
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [#DataBaseName#].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [#DataBaseName#] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET AUTO_CREATE_STATISTICS ON 
+GO
+ALTER DATABASE [#DataBaseName#] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [#DataBaseName#] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [#DataBaseName#] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [#DataBaseName#] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [#DataBaseName#] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [#DataBaseName#] SET  READ_WRITE 
+GO
+ALTER DATABASE [#DataBaseName#] SET RECOVERY FULL 
+GO
+ALTER DATABASE [#DataBaseName#] SET  MULTI_USER 
+GO
+ALTER DATABASE [#DataBaseName#] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [#DataBaseName#] SET DB_CHAINING OFF 
+GO
+USE [#DataBaseName#]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Banka](
+	[BankaId] [int] IDENTITY(1,1) NOT NULL,
+	[BankaIsim] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Banka] PRIMARY KEY CLUSTERED 
+(
+	[BankaId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Ayarlar]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Ayarlar](
+	[Ad] [nvarchar](50) NOT NULL,
+	[Deger1] [nvarchar](250) NULL,
+	[Deger2] [nvarchar](250) NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[SubelerdeOrtak] [bit] NULL,
+ CONSTRAINT [PK_Ayarlar] PRIMARY KEY CLUSTERED 
+(
+	[Ad] ASC,
+	[SUBE_KODU] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[FatIrsUst]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[FatIrsUst](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[INCKEYNO] [int] IDENTITY(1,1) NOT NULL,
+	[FTIRSIP] [smallint] NOT NULL,
+	[FATIRSNO] [varchar](15) NOT NULL,
+	[CARI_KODU] [varchar](15) NULL,
+	[TARIH] [datetime] NOT NULL,
+	[FAT_TIPI] [smallint] NOT NULL,
+	[KDV_DAHILMI] [bit] NULL,
+	[KdvTutar] [float] NULL,
+	[BrutTutar] [float] NULL,
+	[GenelToplam] [float] NULL,
+	[SatirIsk] [float] NULL,
+	[KasaKodu] [varchar](8) NULL,
+	[Irsaliyeli] [bit] NOT NULL,
+	[IrsaliyeNo] [varchar](15) NULL,
+	[SevkTarihi] [datetime] NULL,
+	[Kapatilmis] [char](1) NULL,
+	[VadeTarih] [datetime] NULL,
+	[HesapNo] [char](30) NULL,
+ CONSTRAINT [PK_TBLFATIRSUST] PRIMARY KEY CLUSTERED 
+(
+	[INCKEYNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [IX_FatIrsUst] UNIQUE NONCLUSTERED 
+(
+	[FATIRSNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[OzelGelirGider]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OzelGelirGider](
+	[Kod] [nvarchar](30) NOT NULL,
+	[Ismi] [nvarchar](50) NULL,
+	[KdvOrani] [float] NULL,
+	[GelirGider] [smallint] NOT NULL,
+ CONSTRAINT [PK_OzelGelirGider] PRIMARY KEY CLUSTERED 
+(
+	[Kod] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Kur]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Kur](
+	[BIRIM] [int] IDENTITY(1,1) NOT NULL,
+	[ISIM] [varchar](30) NULL,
+ CONSTRAINT [PK_TBLKUR] PRIMARY KEY CLUSTERED 
+(
+	[BIRIM] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ILCE]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ILCE](
+	[IlceId] [int] IDENTITY(1,1) NOT NULL,
+	[IlceAdi] [nvarchar](50) NOT NULL,
+	[ILKodu] [int] NOT NULL,
+ CONSTRAINT [PK_ILCE] PRIMARY KEY CLUSTERED 
+(
+	[IlceId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[IL]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[IL](
+	[ILKodu] [int] NOT NULL,
+	[Adi] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_IL] PRIMARY KEY CLUSTERED 
+(
+	[ILKodu] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StokBirim]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StokBirim](
+	[BirimId] [int] IDENTITY(1,1) NOT NULL,
+	[Birim] [nchar](20) NOT NULL,
+ CONSTRAINT [PK_StokBirim] PRIMARY KEY CLUSTERED 
+(
+	[BirimId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SiparisUst]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SiparisUst](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[INCKEYNO] [int] IDENTITY(1,1) NOT NULL,
+	[FTIRSIP] [smallint] NOT NULL,
+	[FATIRSNO] [varchar](15) NOT NULL,
+	[CARI_KODU] [varchar](15) NULL,
+	[TARIH] [datetime] NOT NULL,
+	[TESLIM_TARIH] [datetime] NULL,
+	[KDV_DAHILMI] [bit] NOT NULL,
+	[KdvTutar] [float] NULL,
+	[BrutTutar] [float] NULL,
+	[GenelToplam] [float] NULL,
+	[SatirIsk] [float] NULL,
+	[Kapatilmis] [bit] NOT NULL,
+	[VadeTarih] [datetime] NULL,
+ CONSTRAINT [PK_TblSiparisUst] PRIMARY KEY CLUSTERED 
+(
+	[INCKEYNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Sube]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Sube](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[SUBE_ISMI] [nvarchar](50) NULL,
+	[ADRES] [nvarchar](50) NULL,
+	[VERGI_DAIRESI] [nvarchar](50) NULL,
+	[VERGI_NO] [varchar](30) NULL,
+	[MERKEZMI] [bit] NULL,
+	[AKTIF] [bit] NULL,
+ CONSTRAINT [PK_TBLSUBELER] PRIMARY KEY CLUSTERED 
+(
+	[SUBE_KODU] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[FaturaNo]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[FaturaNo](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[TIP] [char](3) NOT NULL,
+	[NUMARA] [varchar](15) NOT NULL,
+	[INCKEYNO] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_TBLFATNO] PRIMARY KEY CLUSTERED 
+(
+	[INCKEYNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[StokCategory]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StokCategory](
+	[CategoryKod] [nvarchar](30) NOT NULL,
+	[CategoryName] [nvarchar](100) NULL,
+	[ParentId] [nvarchar](30) NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_StokCategory] PRIMARY KEY CLUSTERED 
+(
+	[CategoryKod] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Senet]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Senet](
+	[SenetId] [int] IDENTITY(1,1) NOT NULL,
+	[SenetTip] [smallint] NOT NULL,
+	[SenetDurum] [smallint] NOT NULL,
+	[CariKodu] [varchar](15) NOT NULL,
+	[IslemTarih] [datetime] NOT NULL,
+	[VadeTarih] [datetime] NOT NULL,
+	[Tutar] [float] NOT NULL,
+	[SenetNo] [char](30) NULL,
+	[AsilSahibi] [nvarchar](50) NULL,
+	[Kefil1] [nvarchar](50) NULL,
+	[Kefil2] [nvarchar](50) NULL,
+	[Aciklama] [nvarchar](50) NULL,
+	[DurumKasaKod] [varchar](8) NULL,
+	[DurumCariKod] [varchar](15) NULL,
+	[DurumBankaHesapNo] [char](30) NULL,
+	[KayitTarih] [datetime] NOT NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_Senet] PRIMARY KEY CLUSTERED 
+(
+	[SenetId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Kasa]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Kasa](
+	[KASA_KOD] [varchar](8) NOT NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[KASA_ISMI] [nvarchar](50) NULL,
+	[SONDEVIR_TARIH] [datetime] NULL,
+	[SONDEVIR_TUTAR] [float] NULL,
+	[KAYIT_TARIH] [smalldatetime] NULL,
+	[DovizTipi] [smallint] NULL,
+	[SubelerdeOrtak] [bit] NULL,
+ CONSTRAINT [PK_KASA] PRIMARY KEY CLUSTERED 
+(
+	[KASA_KOD] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Kullanici]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Kullanici](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[USER_NO] [int] IDENTITY(1,1) NOT NULL,
+	[USER_NAME] [varchar](30) NULL,
+	[PASSWORD] [varchar](50) NULL,
+	[ADMINMI] [bit] NULL,
+	[SubelerdeOrtak] [bit] NULL,
+ CONSTRAINT [PK_TBLUSER] PRIMARY KEY CLUSTERED 
+(
+	[USER_NO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Dizayn]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dizayn](
+	[DizaynNo] [int] IDENTITY(1,1) NOT NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[DizaynTipi] [smallint] NOT NULL,
+	[DizaynAdi] [nvarchar](30) NOT NULL,
+ CONSTRAINT [PK_Dizayn] PRIMARY KEY CLUSTERED 
+(
+	[DizaynNo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cek]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Cek](
+	[CekId] [int] IDENTITY(1,1) NOT NULL,
+	[CekTip] [smallint] NOT NULL,
+	[CekDurum] [smallint] NOT NULL,
+	[CariKodu] [varchar](15) NOT NULL,
+	[IslemTarih] [datetime] NOT NULL,
+	[VadeTarih] [datetime] NOT NULL,
+	[Banka] [nvarchar](50) NULL,
+	[SubeAdi] [nvarchar](50) NULL,
+	[HesapNo] [char](30) NULL,
+	[CekNo] [char](30) NULL,
+	[AsilSahibi] [nvarchar](50) NULL,
+	[Aciklama] [nvarchar](50) NULL,
+	[Tutar] [float] NOT NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[KayitTarih] [datetime] NOT NULL,
+	[DurumKasaKod] [varchar](8) NULL,
+	[DurumCariKod] [varchar](15) NULL,
+	[DurumBankaHesapNo] [char](30) NULL,
+ CONSTRAINT [PK_Cek] PRIMARY KEY CLUSTERED 
+(
+	[CekId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[BankaHesap]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[BankaHesap](
+	[HesapId] [int] IDENTITY(1,1) NOT NULL,
+	[HesapNo] [char](30) NOT NULL,
+	[BankaAdi] [nvarchar](50) NOT NULL,
+	[HesapSahibi] [nvarchar](50) NOT NULL,
+	[SubeAdi] [nvarchar](50) NOT NULL,
+	[ParaBirimi] [char](10) NOT NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[IBAN] [nvarchar](30) NULL,
+ CONSTRAINT [PK_BankaHesap] PRIMARY KEY CLUSTERED 
+(
+	[HesapId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [IX_BankaHesap] UNIQUE NONCLUSTERED 
+(
+	[HesapNo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CariCategory]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CariCategory](
+	[CategoryKod] [nvarchar](30) NOT NULL,
+	[CategoryName] [nvarchar](100) NULL,
+	[ParentId] [nvarchar](30) NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_CariCategory] PRIMARY KEY CLUSTERED 
+(
+	[CategoryKod] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cari]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Cari](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[CARI_KODU] [varchar](15) NOT NULL,
+	[CariTip] [char](3) NOT NULL,
+	[CARI_ISIM] [nvarchar](50) NULL,
+	[CARI_TEL] [varchar](15) NULL,
+	[CEP_TEL] [varchar](15) NULL,
+	[CARI_ADRES] [nvarchar](100) NULL,
+	[CARI_EMAIL] [varchar](50) NULL,
+	[VergiDairesi] [nvarchar](50) NULL,
+	[VergiNumarasi] [varchar](15) NULL,
+	[Fax] [varchar](20) NULL,
+	[WebAdresi] [nvarchar](60) NULL,
+	[Grup1] [nvarchar](30) NULL,
+	[Grup2] [nvarchar](30) NULL,
+	[Grup3] [nvarchar](30) NULL,
+	[Grup4] [nvarchar](30) NULL,
+	[Il] [nvarchar](50) NULL,
+	[Ilce] [nvarchar](80) NULL,
+	[YetkiliKisi] [nvarchar](50) NULL,
+	[KayitTarih] [datetime] NULL,
+	[SubelerdeOrtak] [bit] NULL,
+	[AlisFiyatKod] [char](15) NULL,
+	[SatisFiyatKod] [char](15) NULL,
+	[Aktif] [bit] NULL,
+ CONSTRAINT [PK_TBLCARI] PRIMARY KEY CLUSTERED 
+(
+	[CARI_KODU] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DizaynGenel]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DizaynGenel](
+	[GenelId] [int] IDENTITY(1,1) NOT NULL,
+	[SatSay] [smallint] NOT NULL,
+	[SutSay] [smallint] NOT NULL,
+	[MaxKalemAdedi] [smallint] NULL,
+	[KalBasSat] [smallint] NULL,
+	[TopKalSonunda] [char](1) NULL,
+	[TopBasSat] [smallint] NULL,
+	[BasimAdedi] [smallint] NOT NULL,
+	[BaskiOnizleme] [bit] NOT NULL,
+	[FontBuyukluk] [float] NOT NULL,
+	[FontAdi] [varchar](50) NOT NULL,
+	[YaziciAdi] [nvarchar](100) NOT NULL,
+	[DizaynNo] [int] NOT NULL,
+ CONSTRAINT [PK_DizaynGenel] PRIMARY KEY CLUSTERED 
+(
+	[GenelId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[KasaHareket]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[KasaHareket](
+	[INCKEYNO] [int] IDENTITY(1,1) NOT NULL,
+	[KASA_KOD] [varchar](8) NOT NULL,
+	[GELIR_GIDER] [char](1) NOT NULL,
+	[TIP] [char](2) NULL,
+	[FISNO] [varchar](15) NULL,
+	[KUL_NO] [int] NULL,
+	[KDV_ORANI] [float] NULL,
+	[KDV_TUTAR] [float] NULL,
+	[Tutar] [float] NOT NULL,
+	[Aciklama] [varchar](100) NULL,
+	[Tarih] [datetime] NULL,
+	[DirektSatis] [char](1) NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[CekSenetId] [int] NULL,
+	[OzelGelirGiderKod] [nvarchar](30) NULL,
+ CONSTRAINT [PK_KASAHAREKET] PRIMARY KEY CLUSTERED 
+(
+	[INCKEYNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[HesapHareket]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[HesapHareket](
+	[BankaHareketId] [int] IDENTITY(1,1) NOT NULL,
+	[HesapId] [int] NOT NULL,
+	[Tarih] [datetime] NOT NULL,
+	[DekontNo] [nchar](20) NULL,
+	[Tutar] [float] NOT NULL,
+	[Aciklama] [nvarchar](50) NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[HareketTuru] [smallint] NOT NULL,
+	[KasaKod] [varchar](8) NULL,
+	[CariKod] [varchar](15) NULL,
+	[KasaHarId] [int] NULL,
+	[CariHarId] [int] NULL,
+	[FisNo] [varchar](15) NULL,
+	[CekSenetId] [int] NULL,
+ CONSTRAINT [PK_HesapHareket] PRIMARY KEY CLUSTERED 
+(
+	[BankaHareketId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Stok]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Stok](
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[STOK_KODU] [varchar](35) NOT NULL,
+	[STOK_ADI] [nvarchar](100) NULL,
+	[KDV_ORANI] [float] NULL,
+	[AZAMI_MIKTAR] [int] NULL,
+	[ASGARI_MIKTAR] [int] NULL,
+	[BARKOD1] [varchar](35) NULL,
+	[BARKOD2] [varchar](35) NULL,
+	[BARKOD3] [varchar](35) NULL,
+	[SATISDOVIZTIPI] [int] NULL,
+	[ALISDOVIZTIPI] [int] NULL,
+	[Grup1] [nvarchar](30) NULL,
+	[Grup2] [nvarchar](30) NULL,
+	[Grup3] [nvarchar](30) NULL,
+	[Grup4] [nvarchar](30) NULL,
+	[Grup5] [nvarchar](30) NULL,
+	[KayitTarih] [datetime] NULL,
+	[SatisFiyat1] [float] NULL,
+	[SatisFiyat2] [float] NULL,
+	[SatisFiyat3] [float] NULL,
+	[AlisFiyat1] [float] NULL,
+	[AlisFiyat2] [float] NULL,
+	[AlisFiyat3] [float] NULL,
+	[AnaBirim] [nchar](20) NULL,
+	[AltBirim1] [nchar](20) NULL,
+	[AltBirim2] [nchar](20) NULL,
+	[AltBirim3] [nchar](20) NULL,
+	[Carpan1] [float] NULL,
+	[Carpan2] [float] NULL,
+	[Carpan3] [float] NULL,
+	[SubelerdeOrtak] [bit] NULL,
+	[Aktif] [bit] NULL,
+ CONSTRAINT [PK_TBLSTOK] PRIMARY KEY CLUSTERED 
+(
+	[STOK_KODU] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Post]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Post](
+	[PostId] [int] IDENTITY(1,1) NOT NULL,
+	[KesintiOran] [float] NOT NULL,
+	[HesabaGecisTarih] [datetime] NOT NULL,
+	[HesapId] [int] NOT NULL,
+ CONSTRAINT [PK_Post] PRIMARY KEY CLUSTERED 
+(
+	[PostId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StokHareket]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[StokHareket](
+	[INCKEYNO] [int] IDENTITY(1,1) NOT NULL,
+	[STOK_KODU] [varchar](35) NOT NULL,
+	[GCMIK] [float] NOT NULL,
+	[GCKOD] [char](1) NOT NULL,
+	[TARIH] [datetime] NOT NULL,
+	[BIRIM_FIYAT] [float] NULL,
+	[FisNo] [varchar](15) NULL,
+	[KDV] [float] NULL,
+	[HTUR] [char](2) NOT NULL,
+	[SATISK1] [float] NULL,
+	[SATISK2] [float] NULL,
+	[SATISK3] [float] NULL,
+	[SATISK4] [float] NULL,
+	[SATISK5] [float] NULL,
+	[FTIRSIP] [smallint] NOT NULL,
+	[DirektSatis] [char](1) NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[SipNum] [varchar](15) NULL,
+	[HareketBirim] [nchar](20) NULL,
+	[HareketMiktar] [float] NOT NULL,
+ CONSTRAINT [PK_TBLSTHAR] PRIMARY KEY CLUSTERED 
+(
+	[INCKEYNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[SiparisKalem]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SiparisKalem](
+	[INCKEYNO] [int] IDENTITY(1,1) NOT NULL,
+	[STOK_KODU] [varchar](35) NOT NULL,
+	[GCMIK] [float] NOT NULL,
+	[GCKOD] [char](1) NOT NULL,
+	[TARIH] [datetime] NOT NULL,
+	[BIRIM_FIYAT] [float] NULL,
+	[FisNo] [varchar](15) NULL,
+	[KdvOrani] [float] NULL,
+	[SATISK1] [float] NULL,
+	[SATISK2] [float] NULL,
+	[SATISK3] [float] NULL,
+	[SATISK4] [float] NULL,
+	[SATISK5] [float] NULL,
+	[FTIRSIP] [smallint] NOT NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[HareketBirim] [nchar](20) NULL,
+	[HareketMiktar] [float] NOT NULL,
+ CONSTRAINT [PK_SiparisKalem] PRIMARY KEY CLUSTERED 
+(
+	[INCKEYNO] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DizaynKalem]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DizaynKalem](
+	[KalemId] [int] IDENTITY(1,1) NOT NULL,
+	[GenelId] [int] NOT NULL,
+	[SahaYeri] [char](1) NOT NULL,
+	[BaslikYaz] [bit] NOT NULL,
+	[Aciklama] [nvarchar](200) NULL,
+	[Satir] [smallint] NOT NULL,
+	[Sutun] [smallint] NOT NULL,
+	[Uzunluk] [smallint] NULL,
+	[Ondalik] [smallint] NULL,
+	[AlanIsim] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_DizaynKalem] PRIMARY KEY CLUSTERED 
+(
+	[KalemId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CariHareket]    Script Date: 05/10/2011 18:15:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CariHareket](
+	[CariHarId] [int] IDENTITY(1,1) NOT NULL,
+	[CariKodu] [varchar](15) NOT NULL,
+	[FisNo] [varchar](15) NULL,
+	[Borc] [float] NOT NULL,
+	[Alacak] [float] NOT NULL,
+	[Tarih] [datetime] NOT NULL,
+	[HareketTuru] [smallint] NULL,
+	[VadeTarih] [datetime] NULL,
+	[SUBE_KODU] [nvarchar](20) NOT NULL,
+	[Aciklama] [nvarchar](100) NULL,
+	[CekSenetId] [int] NULL,
+ CONSTRAINT [PK_CariHareket] PRIMARY KEY CLUSTERED 
+(
+	[CariHarId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Default [DF_SiparisKalem_HareketMiktar]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[SiparisKalem] ADD  CONSTRAINT [DF_SiparisKalem_HareketMiktar]  DEFAULT ((0)) FOR [HareketMiktar]
+GO
+/****** Object:  Default [DF_StokHareket_HareketMiktar]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[StokHareket] ADD  CONSTRAINT [DF_StokHareket_HareketMiktar]  DEFAULT ((0)) FOR [HareketMiktar]
+GO
+/****** Object:  ForeignKey [FK_BankaHesap_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[BankaHesap]  WITH CHECK ADD  CONSTRAINT [FK_BankaHesap_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[BankaHesap] CHECK CONSTRAINT [FK_BankaHesap_Sube]
+GO
+/****** Object:  ForeignKey [FK_Cari_CariCategory]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Cari]  WITH CHECK ADD  CONSTRAINT [FK_Cari_CariCategory] FOREIGN KEY([Grup1])
+REFERENCES [dbo].[CariCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Cari] CHECK CONSTRAINT [FK_Cari_CariCategory]
+GO
+/****** Object:  ForeignKey [FK_Cari_CariCategory1]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Cari]  WITH CHECK ADD  CONSTRAINT [FK_Cari_CariCategory1] FOREIGN KEY([Grup2])
+REFERENCES [dbo].[CariCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Cari] CHECK CONSTRAINT [FK_Cari_CariCategory1]
+GO
+/****** Object:  ForeignKey [FK_Cari_CariCategory2]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Cari]  WITH CHECK ADD  CONSTRAINT [FK_Cari_CariCategory2] FOREIGN KEY([Grup3])
+REFERENCES [dbo].[CariCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Cari] CHECK CONSTRAINT [FK_Cari_CariCategory2]
+GO
+/****** Object:  ForeignKey [FK_Cari_CariCategory3]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Cari]  WITH CHECK ADD  CONSTRAINT [FK_Cari_CariCategory3] FOREIGN KEY([Grup4])
+REFERENCES [dbo].[CariCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Cari] CHECK CONSTRAINT [FK_Cari_CariCategory3]
+GO
+/****** Object:  ForeignKey [FK_TBLCARI_TBLSUBELER]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Cari]  WITH CHECK ADD  CONSTRAINT [FK_TBLCARI_TBLSUBELER] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Cari] CHECK CONSTRAINT [FK_TBLCARI_TBLSUBELER]
+GO
+/****** Object:  ForeignKey [FK_CariCategory_CariCategory]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[CariCategory]  WITH CHECK ADD  CONSTRAINT [FK_CariCategory_CariCategory] FOREIGN KEY([ParentId])
+REFERENCES [dbo].[CariCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[CariCategory] CHECK CONSTRAINT [FK_CariCategory_CariCategory]
+GO
+/****** Object:  ForeignKey [FK_CariCategory_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[CariCategory]  WITH CHECK ADD  CONSTRAINT [FK_CariCategory_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[CariCategory] CHECK CONSTRAINT [FK_CariCategory_Sube]
+GO
+/****** Object:  ForeignKey [FK_CariHareket_Cari]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[CariHareket]  WITH CHECK ADD  CONSTRAINT [FK_CariHareket_Cari] FOREIGN KEY([CariKodu])
+REFERENCES [dbo].[Cari] ([CARI_KODU])
+GO
+ALTER TABLE [dbo].[CariHareket] CHECK CONSTRAINT [FK_CariHareket_Cari]
+GO
+/****** Object:  ForeignKey [FK_CariHareket_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[CariHareket]  WITH CHECK ADD  CONSTRAINT [FK_CariHareket_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[CariHareket] CHECK CONSTRAINT [FK_CariHareket_Sube]
+GO
+/****** Object:  ForeignKey [FK_Cek_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Cek]  WITH CHECK ADD  CONSTRAINT [FK_Cek_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Cek] CHECK CONSTRAINT [FK_Cek_Sube]
+GO
+/****** Object:  ForeignKey [FK_Dizayn_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Dizayn]  WITH CHECK ADD  CONSTRAINT [FK_Dizayn_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Dizayn] CHECK CONSTRAINT [FK_Dizayn_Sube]
+GO
+/****** Object:  ForeignKey [FK_DizaynGenel_Dizayn]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[DizaynGenel]  WITH CHECK ADD  CONSTRAINT [FK_DizaynGenel_Dizayn] FOREIGN KEY([DizaynNo])
+REFERENCES [dbo].[Dizayn] ([DizaynNo])
+GO
+ALTER TABLE [dbo].[DizaynGenel] CHECK CONSTRAINT [FK_DizaynGenel_Dizayn]
+GO
+/****** Object:  ForeignKey [FK_DizaynKalem_DizaynGenel]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[DizaynKalem]  WITH CHECK ADD  CONSTRAINT [FK_DizaynKalem_DizaynGenel] FOREIGN KEY([GenelId])
+REFERENCES [dbo].[DizaynGenel] ([GenelId])
+GO
+ALTER TABLE [dbo].[DizaynKalem] CHECK CONSTRAINT [FK_DizaynKalem_DizaynGenel]
+GO
+/****** Object:  ForeignKey [FK_TBLFATNO_TBLSUBELER]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[FaturaNo]  WITH CHECK ADD  CONSTRAINT [FK_TBLFATNO_TBLSUBELER] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[FaturaNo] CHECK CONSTRAINT [FK_TBLFATNO_TBLSUBELER]
+GO
+/****** Object:  ForeignKey [FK_HesapHareket_BankaHesap]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[HesapHareket]  WITH CHECK ADD  CONSTRAINT [FK_HesapHareket_BankaHesap] FOREIGN KEY([HesapId])
+REFERENCES [dbo].[BankaHesap] ([HesapId])
+GO
+ALTER TABLE [dbo].[HesapHareket] CHECK CONSTRAINT [FK_HesapHareket_BankaHesap]
+GO
+/****** Object:  ForeignKey [FK_HesapHareket_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[HesapHareket]  WITH CHECK ADD  CONSTRAINT [FK_HesapHareket_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[HesapHareket] CHECK CONSTRAINT [FK_HesapHareket_Sube]
+GO
+/****** Object:  ForeignKey [FK_KASA_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Kasa]  WITH CHECK ADD  CONSTRAINT [FK_KASA_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Kasa] CHECK CONSTRAINT [FK_KASA_Sube]
+GO
+/****** Object:  ForeignKey [FK_KASAHAREKET_KASA]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[KasaHareket]  WITH CHECK ADD  CONSTRAINT [FK_KASAHAREKET_KASA] FOREIGN KEY([KASA_KOD])
+REFERENCES [dbo].[Kasa] ([KASA_KOD])
+GO
+ALTER TABLE [dbo].[KasaHareket] CHECK CONSTRAINT [FK_KASAHAREKET_KASA]
+GO
+/****** Object:  ForeignKey [FK_KasaHareket_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[KasaHareket]  WITH CHECK ADD  CONSTRAINT [FK_KasaHareket_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[KasaHareket] CHECK CONSTRAINT [FK_KasaHareket_Sube]
+GO
+/****** Object:  ForeignKey [FK_TBLUSER_TBLSUBELER]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Kullanici]  WITH NOCHECK ADD  CONSTRAINT [FK_TBLUSER_TBLSUBELER] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Kullanici] CHECK CONSTRAINT [FK_TBLUSER_TBLSUBELER]
+GO
+/****** Object:  ForeignKey [FK_Post_BankaHesap]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Post]  WITH CHECK ADD  CONSTRAINT [FK_Post_BankaHesap] FOREIGN KEY([HesapId])
+REFERENCES [dbo].[BankaHesap] ([HesapId])
+GO
+ALTER TABLE [dbo].[Post] CHECK CONSTRAINT [FK_Post_BankaHesap]
+GO
+/****** Object:  ForeignKey [FK_Senet_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Senet]  WITH CHECK ADD  CONSTRAINT [FK_Senet_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Senet] CHECK CONSTRAINT [FK_Senet_Sube]
+GO
+/****** Object:  ForeignKey [FK_SiparisKalem_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[SiparisKalem]  WITH CHECK ADD  CONSTRAINT [FK_SiparisKalem_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[SiparisKalem] CHECK CONSTRAINT [FK_SiparisKalem_Sube]
+GO
+/****** Object:  ForeignKey [FK_SiparisKalem_TBLSTOK]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[SiparisKalem]  WITH CHECK ADD  CONSTRAINT [FK_SiparisKalem_TBLSTOK] FOREIGN KEY([STOK_KODU])
+REFERENCES [dbo].[Stok] ([STOK_KODU])
+GO
+ALTER TABLE [dbo].[SiparisKalem] CHECK CONSTRAINT [FK_SiparisKalem_TBLSTOK]
+GO
+/****** Object:  ForeignKey [FK_Stok_StokCategory]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_StokCategory] FOREIGN KEY([Grup1])
+REFERENCES [dbo].[StokCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_StokCategory]
+GO
+/****** Object:  ForeignKey [FK_Stok_StokCategory1]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_StokCategory1] FOREIGN KEY([Grup2])
+REFERENCES [dbo].[StokCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_StokCategory1]
+GO
+/****** Object:  ForeignKey [FK_Stok_StokCategory2]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_StokCategory2] FOREIGN KEY([Grup3])
+REFERENCES [dbo].[StokCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_StokCategory2]
+GO
+/****** Object:  ForeignKey [FK_Stok_StokCategory3]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_StokCategory3] FOREIGN KEY([Grup4])
+REFERENCES [dbo].[StokCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_StokCategory3]
+GO
+/****** Object:  ForeignKey [FK_Stok_StokCategory4]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_StokCategory4] FOREIGN KEY([Grup5])
+REFERENCES [dbo].[StokCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_StokCategory4]
+GO
+/****** Object:  ForeignKey [FK_TBLSTOK_TBLKUR]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_TBLSTOK_TBLKUR] FOREIGN KEY([SATISDOVIZTIPI])
+REFERENCES [dbo].[Kur] ([BIRIM])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_TBLSTOK_TBLKUR]
+GO
+/****** Object:  ForeignKey [FK_TBLSTOK_TBLKUR1]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_TBLSTOK_TBLKUR1] FOREIGN KEY([ALISDOVIZTIPI])
+REFERENCES [dbo].[Kur] ([BIRIM])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_TBLSTOK_TBLKUR1]
+GO
+/****** Object:  ForeignKey [FK_TBLSTOK_TBLSUBELER]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_TBLSTOK_TBLSUBELER] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_TBLSTOK_TBLSUBELER]
+GO
+/****** Object:  ForeignKey [FK_StokCategory_StokCategory1]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[StokCategory]  WITH CHECK ADD  CONSTRAINT [FK_StokCategory_StokCategory1] FOREIGN KEY([ParentId])
+REFERENCES [dbo].[StokCategory] ([CategoryKod])
+GO
+ALTER TABLE [dbo].[StokCategory] CHECK CONSTRAINT [FK_StokCategory_StokCategory1]
+GO
+/****** Object:  ForeignKey [FK_StokCategory_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[StokCategory]  WITH CHECK ADD  CONSTRAINT [FK_StokCategory_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[StokCategory] CHECK CONSTRAINT [FK_StokCategory_Sube]
+GO
+/****** Object:  ForeignKey [FK_StokHareket_Sube]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[StokHareket]  WITH CHECK ADD  CONSTRAINT [FK_StokHareket_Sube] FOREIGN KEY([SUBE_KODU])
+REFERENCES [dbo].[Sube] ([SUBE_KODU])
+GO
+ALTER TABLE [dbo].[StokHareket] CHECK CONSTRAINT [FK_StokHareket_Sube]
+GO
+/****** Object:  ForeignKey [FK_TBLSTHAR_TBLSTOK]    Script Date: 05/10/2011 18:15:14 ******/
+ALTER TABLE [dbo].[StokHareket]  WITH CHECK ADD  CONSTRAINT [FK_TBLSTHAR_TBLSTOK] FOREIGN KEY([STOK_KODU])
+REFERENCES [dbo].[Stok] ([STOK_KODU])
+GO
+ALTER TABLE [dbo].[StokHareket] CHECK CONSTRAINT [FK_TBLSTHAR_TBLSTOK]
+GO
+INSERT INTO [dbo].[StokBirim]([Birim])VALUES('adet')
+INSERT INTO [dbo].[StokBirim]([Birim])VALUES('gr')
+INSERT INTO [dbo].[StokBirim]([Birim])VALUES('kg')
+INSERT INTO [dbo].[StokBirim]([Birim])VALUES('koli')
+INSERT INTO [dbo].[StokBirim]([Birim])VALUES('litre')
+INSERT INTO [dbo].[StokBirim]([Birim])VALUES('paket')
+GO
+insert into Banka(BankaIsim)values(N'Akbank')
+insert into Banka(BankaIsim)values(N'Denizbank')
+insert into Banka(BankaIsim)values(N'Fortis')
+insert into Banka(BankaIsim)values(N'Garanti bankası')
+insert into Banka(BankaIsim)values(N'Halk bankası')
+insert into Banka(BankaIsim)values(N'Hsbc')
+insert into Banka(BankaIsim)values(N'Koçbank')
+insert into Banka(BankaIsim)values(N'Şekerbank')
+insert into Banka(BankaIsim)values(N'Teb')
+insert into Banka(BankaIsim)values(N'İş bankası')
+insert into Banka(BankaIsim)values(N'Vakıfbank')
+insert into Banka(BankaIsim)values(N'Yapı kredi')
+insert into Banka(BankaIsim)values(N'Ziraat bankası')
+insert into Banka(BankaIsim)values(N'Denizbank')
+GO
+INSERT INTO [dbo].[Sube]
+           ([SUBE_KODU]
+           ,[SUBE_ISMI]           
+           ,[MERKEZMI]
+           ,[AKTIF])
+     VALUES
+           ('0'
+           ,'merkez',1,1
+           )
+GO
+INSERT INTO [dbo].[Kullanici]
+           ([SUBE_KODU]
+           ,[USER_NAME]
+           ,[PASSWORD]
+           ,[ADMINMI])
+     VALUES
+           ('0','indeks','202CB962AC59075B964B07152D234B70',1)           

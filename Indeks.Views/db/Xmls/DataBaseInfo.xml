@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataBase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ConString>Server=FATIH;Initial Catalog=HAN2009;Password=sapass;User ID=sa</ConString>
+</DataBase>

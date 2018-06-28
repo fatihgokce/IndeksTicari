@@ -14,27 +14,45 @@ namespace Indeks.Views
 {
   public class Engine
   {
-    private static string XmlPath = Path.Combine(Application.StartupPath, "Xmls//settings.xml");
-  
-    public static string RaporPath() {
+        private static string XmlPath = "";//Path.Combine(Application.StartupPath, "Xmls\\settings.xml");
+        private static string PPath = "";
+    static Engine()
+    {
+           
+
+#if (DEBUG)
+            string path = Application.StartupPath;
+            string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\"));
+            PPath = Path.Combine(newPath,"db");
+            XmlPath = Path.Combine(PPath, "Xmls\\settings.xml");
+
+#else
+        
+            PPath = Application.StartupPath;
+            XmlPath = Path.Combine(PPath, "Xmls\\settings.xml");
+             MessageBox.Show("burada");
+#endif
+
+        }
+        public static string RaporPath() {
 
       //return @"D:\Project2010\Han\Indeks.Views\Rapor";
-      return Path.Combine(Application.StartupPath, "Rapor"); ;
+      return Path.Combine(PPath, "Rapor"); ;
     }
     public static string DokumanPath() {
 
         //return @"D:\Project2010\Han\Indeks.Views\Dokumanlar";
-       return Path.Combine(Application.StartupPath, "Dokumanlar"); ;
+       return Path.Combine(PPath, "Dokumanlar"); ;
     }
     public static string DataBasePath() {
   
        //return @"D:\Project2010\Han\Indeks.Views\Db";
-        return Path.Combine(Application.StartupPath, "Db");
+        return Path.Combine(PPath, "Db");
     }
     public static string SqlLitePath() {
 
         //return @"D:\Project2010\Han\Indeks.Views\Db";
-        return Path.Combine(Application.StartupPath, "SqlLite");
+        return Path.Combine(PPath, "SqlLite");
     }
     public static string GetSqlLiteConString() {
         string veriTaban="Data Source=";       
