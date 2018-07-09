@@ -28,9 +28,9 @@ namespace Indeks.Views
 
 #else
         
-            PPath = Application.StartupPath;
+            PPath = Path.Combine(Application.StartupPath,"db"); 
             XmlPath = Path.Combine(PPath, "Xmls\\settings.xml");
-             MessageBox.Show("burada");
+           
 #endif
 
         }
@@ -58,6 +58,7 @@ namespace Indeks.Views
         string veriTaban="Data Source=";       
         veriTaban+=Path.Combine( DataBasePath(),"Indeks.db");
         veriTaban+=";Version=3;";
+        LogWrite.Write(new Exception(veriTaban));
         return veriTaban;
     }
     public static void SaveSettings(Settings settings) {
@@ -92,8 +93,8 @@ namespace Indeks.Views
                         Kurulum = x.Element("Kurulum").Value
                     };
 
-        return query.SingleOrDefault();
-        //return new Settings(); // fatura form hata düzeliyor aktif edince
+        return query.FirstOrDefault();//.SingleOrDefault();
+            //return new Settings(); // fatura form hata düzeliyor aktif edince
 
     }
     public static SqlServerType GetSqlServerType() {
