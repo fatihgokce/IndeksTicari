@@ -58,7 +58,7 @@ namespace Indeks.Views
         string veriTaban="Data Source=";       
         veriTaban+=Path.Combine( DataBasePath(),"Indeks.db");
         veriTaban+=";Version=3;";
-        LogWrite.Write(new Exception(veriTaban));
+        //LogWrite.Write(new Exception(veriTaban));
         return veriTaban;
     }
     public static void SaveSettings(Settings settings) {
